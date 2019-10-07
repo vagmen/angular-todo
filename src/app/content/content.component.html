@@ -1,0 +1,5 @@
+<div class="content">
+  <app-list [tasks]="tasks" (deleteTask)="deleteTask(1)"></app-list>
+  <strong>Выполнено</strong>
+  <app-list [tasks]="completedTasks" (deleteTask)="deleteTask(1)"></app-list>
+</div>
