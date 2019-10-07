@@ -1,30 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { Todo, TodoStore } from "../todo.store";
-import { fromMobx } from "ngx-mobx";
-import { Observable } from "rxjs/Observable";
+import { Injectable } from "@angular/core";
+import { Task } from "./content/content.component";
+import { Observable, of } from "rxjs";
+import { Todo } from "./todo.store";
 
-export interface Task {
-  title: string;
-  description: string;
-  date: Date;
-  completed: boolean;
-  id: number;
-}
-
-@Component({
-  selector: "app-content",
-  templateUrl: "./content.component.html",
-  styleUrls: ["./content.component.less"],
-})
-export class ContentComponent implements OnInit {
-  tasks: Observable<Todo[]>;
-
-  constructor(private _todoStore: TodoStore) {}
-
-  ngOnInit() {
-    this._todoStore.getTodos();
-    this.tasks = fromMobx(() => this._todoStore.tasks);
-  }
+@Injectable()
+export class TodoService {
+  constructor() {}
 
   // tasks: Task[] = [
   //   { title: "Задача1", description: "Описание", date: new Date(), completed: false, id: 1 },
@@ -42,7 +23,21 @@ export class ContentComponent implements OnInit {
   //   { title: "Задача5", description: "Описание", date: new Date(), completed: true, id: 10 },
   // ];
 
-  deleteTask(id) {
-    this.tasks.filter(task => task.id !== id);
+  // deleteTask(id: number): Observable<Task> {
+  //   const task = this.tasks.find(t => t.id === id);
+  //   this.tasks.splice(task.id, 1);
+  //   return of(task);
+  // }
+
+  // getTasks(): Observable<Task[]> {
+  //   return of(this.tasks);
+  // }
+
+  getTasks() {
+    return new Promise<Todo[]>(funStuff => {
+      setTimeout(() => {
+        funStuff([new Todo({ title: "Learn Mobx" })]);
+      }, 1000);
+    });
   }
 }
