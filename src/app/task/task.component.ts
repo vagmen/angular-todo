@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Task } from "../content/content.component";
+import { Task, TodosStore } from "../todos.store";
 
 @Component({
   selector: "app-task",
@@ -7,9 +7,10 @@ import { Task } from "../content/content.component";
   styleUrls: ["./task.component.less"],
 })
 export class TaskComponent implements OnInit {
+  constructor(public todosStore: TodosStore) {}
   @Input() task: Task;
 
-  selectedTask: Task;
+  // selectedTask: Task;
 
   isWarning() {
     return true;
@@ -21,7 +22,7 @@ export class TaskComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSelect(task: Task) {
-    this.selectedTask = task;
-  }
+  // onSelect(task: Task) {
+  //   this.selectedTask = task;
+  // }
 }

@@ -1,13 +1,18 @@
-<div class="task" [ngClass]="{
+<div
+  class="task"
+  [ngClass]="{
     crossedOut: task.completed === true,
     warning: task.completed === false && isWarning,
     error: task.completed === false && isError
-}" (click)="onSelect(task)">
-  <mat-checkbox class="checkbox" (click)="task.completed = !task.completed"></mat-checkbox>
+  }"
+  *mobxAutorun
+>
+  <mat-checkbox class="checkbox" (change)="todosStore.complete(task)" [checked]="task.completed"></mat-checkbox>
+  <!-- (click)="task.completed = !task.completed"  -->
   <!-- [(ngModel)]="task.completed" -->
-  <span class="title">{{task.title}}</span>
-  <button mat-icon-button aria-label="Удалить" matTooltip='Удалить задачу' (click)="task.deleteHandler()">
+  <span class="title">{{ task.title }}</span>
+  <!-- <button mat-icon-button aria-label="Удалить" matTooltip='Удалить задачу' (click)="task.deleteHandler()">
     <mat-icon>delete</mat-icon>
-  </button>
-  <span class="date">{{task.date | date:'d LLLL' : null : 'ru'}}</span>
+  </button> -->
+  <!-- <span class="date">{{task.date | date:'d LLLL' : null : 'ru'}}</span> -->
 </div>

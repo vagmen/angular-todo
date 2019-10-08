@@ -9,17 +9,24 @@ import { FormsModule } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MobxAngularModule } from "mobx-angular";
+import { MatInputModule } from "@angular/material/input";
+import { MatCardModule } from "@angular/material/card";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { ContentComponent } from "./content/content.component";
 import { ListComponent } from "./list/list.component";
 import { TaskComponent } from "./task/task.component";
+import { TodosStore } from "./todos.store";
+import { NewTaskComponent } from "./new-task/new-task.component";
+import { MatNativeDateModule } from "@angular/material/core";
 
 registerLocaleData(localeRu, "ru");
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ContentComponent, ListComponent, TaskComponent],
+  declarations: [AppComponent, HeaderComponent, ContentComponent, ListComponent, TaskComponent, NewTaskComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -29,8 +36,13 @@ registerLocaleData(localeRu, "ru");
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
+    MobxAngularModule,
+    MatInputModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [],
+  providers: [TodosStore, MatDatepickerModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
