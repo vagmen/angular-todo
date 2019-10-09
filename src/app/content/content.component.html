@@ -2,5 +2,5 @@
   <app-new-task></app-new-task>
   <app-list [tasks]="todosStore.tasks"></app-list>
   <strong *ngIf="todosStore.completedTasks.length > 0">Выполнено</strong>
-  <app-list [tasks]="todosStore.completedTasks"></app-list>
+  <app-completed-list [tasks]="todosStore.completedTasks"></app-completed-list>
 </div>

@@ -14,6 +14,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatNativeDateModule } from "@angular/material/core";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
@@ -22,12 +24,20 @@ import { ListComponent } from "./list/list.component";
 import { TaskComponent } from "./task/task.component";
 import { TodosStore } from "./todos.store";
 import { NewTaskComponent } from "./new-task/new-task.component";
-import { MatNativeDateModule } from "@angular/material/core";
+import { CompletedListComponent } from "./completed-list/completed-list.component";
 
 registerLocaleData(localeRu, "ru");
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, ContentComponent, ListComponent, TaskComponent, NewTaskComponent],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    ContentComponent,
+    ListComponent,
+    CompletedListComponent,
+    TaskComponent,
+    NewTaskComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -43,6 +53,7 @@ registerLocaleData(localeRu, "ru");
     MatDatepickerModule,
     MatNativeDateModule,
     DragDropModule,
+    MatDialogModule,
   ],
   providers: [TodosStore, MatDatepickerModule],
   bootstrap: [AppComponent],

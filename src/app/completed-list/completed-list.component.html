@@ -1,0 +1,10 @@
+<div
+  class="list"
+  (cdkDropListDropped)="todosStore.drop($event)"
+  cdkDropList
+  [cdkDropListData]="tasks"
+  id="list-two"
+  [cdkDropListConnectedTo]="['list-one']"
+>
+  <app-task *ngFor="let iterTask of tasks" [task]="iterTask" cdkDrag></app-task>
+</div>

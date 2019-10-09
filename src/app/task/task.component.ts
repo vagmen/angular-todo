@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { Task, TodosStore } from "../todos.store";
+import { MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: "app-task",
@@ -37,3 +38,11 @@ export class TaskComponent implements OnInit {
   //   this.selectedTask = task;
   // }
 }
+
+// @Component({
+//   selector: "edit-task-dialog",
+//   templateUrl: "edit-task-dialog.html",
+// })
+// export class DialogDataExampleDialog {
+//   constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog>) {}
+// }
