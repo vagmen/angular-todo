@@ -30,7 +30,6 @@ export class TodosStore {
   @observable selectedTask: Task;
 
   constructor() {
-    // this.localStorageSync();
     this.resetForm();
   }
 
@@ -82,20 +81,7 @@ export class TodosStore {
     }
   }
 
-  @action editTask(task: Task) {}
-
   @action setCompleteAll(value) {
     this.tasks.forEach(task => task.setCompleted(value));
   }
-
-  // private localStorageSync() {
-  //   const initialTasks = JSON.parse(localStorage.todos || "[]");
-  //   this.tasks = initialTasks.map(todo => new Task(todo));
-  //   this.filter = JSON.parse(localStorage.filter || '"SHOW_ALL"');
-
-  //   autorun(() => {
-  //     localStorage.todos = JSON.stringify(toJS(this.tasks));
-  //     localStorage.filter = JSON.stringify(toJS(this.filter));
-  //   });
-  // }
 }

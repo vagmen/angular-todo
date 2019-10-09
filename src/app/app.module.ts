@@ -21,7 +21,7 @@ import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
 import { ContentComponent } from "./content/content.component";
 import { ListComponent } from "./list/list.component";
-import { TaskComponent } from "./task/task.component";
+import { TaskComponent, EditTaskDialog } from "./task/task.component";
 import { TodosStore } from "./todos.store";
 import { NewTaskComponent } from "./new-task/new-task.component";
 import { CompletedListComponent } from "./completed-list/completed-list.component";
@@ -37,6 +37,7 @@ registerLocaleData(localeRu, "ru");
     CompletedListComponent,
     TaskComponent,
     NewTaskComponent,
+    EditTaskDialog,
   ],
   imports: [
     BrowserModule,
@@ -57,5 +58,6 @@ registerLocaleData(localeRu, "ru");
   ],
   providers: [TodosStore, MatDatepickerModule],
   bootstrap: [AppComponent],
+  entryComponents: [EditTaskDialog],
 })
 export class AppModule {}

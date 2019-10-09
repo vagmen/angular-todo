@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Inject } from "@angular/core";
 import { Task, TodosStore } from "../todos.store";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
 @Component({
   selector: "app-task",
@@ -8,7 +8,7 @@ import { MatDialogRef } from "@angular/material/dialog";
   styleUrls: ["./task.component.less"],
 })
 export class TaskComponent implements OnInit {
-  constructor(public todosStore: TodosStore) {}
+  constructor(public todosStore: TodosStore, public dialog: MatDialog) {}
   @Input() task: Task;
 
   today: Date;
@@ -34,15 +34,24 @@ export class TaskComponent implements OnInit {
     this.today = new Date();
     this.taskDate = this.task.date;
   }
-  // onSelect(task: Task) {
-  //   this.selectedTask = task;
-  // }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditTaskDialog, {
+      width: "500px",
+      data: this.task,
+    });
+  }
 }
 
-// @Component({
-//   selector: "edit-task-dialog",
-//   templateUrl: "edit-task-dialog.html",
-// })
-// export class DialogDataExampleDialog {
-//   constructor(public dialogRef: MatDialogRef<DialogOverviewExampleDialog>) {}
-// }
+@Component({
+  selector: "edit-task-dialog",
+  templateUrl: "edit-task-dialog.html",
+  styleUrls: ["./task.component.less"],
+})
+export class EditTaskDialog {
+  constructor(public dialogRef: MatDialogRef<EditTaskDialog>, @Inject(MAT_DIALOG_DATA) public data: Task) {}
+
+  onClose(): void {
+    this.dialogRef.close();
+  }
+}

@@ -10,7 +10,7 @@
   <mat-checkbox class="checkbox" (change)="todosStore.complete(task)" [checked]="task.completed"></mat-checkbox>
   <span class="title">{{ task.title }}</span>
   <div class="controls">
-    <button mat-icon-button aria-label="Редактировать" (click)="todosStore.editTask(task)">
+    <button mat-icon-button aria-label="Редактировать" (click)="openDialog(task)">
       <mat-icon>edit</mat-icon>
     </button>
     <button mat-icon-button aria-label="Удалить" (click)="todosStore.removeTask(task)">
