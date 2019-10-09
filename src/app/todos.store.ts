@@ -1,14 +1,17 @@
 import { observable, computed, action, autorun, toJS } from "mobx";
 import { Injectable } from "@angular/core";
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
 
 export class Task {
   @observable completed = false;
   @observable title: string;
+  @observable description: string;
   @observable date: Date;
 
-  constructor({ title, completed, date }) {
+  constructor({ title, description, completed, date }) {
     this.completed = completed;
     this.title = title;
+    this.description = description;
     this.date = date;
   }
 
@@ -21,17 +24,26 @@ export class Task {
 export class TodosStore {
   @observable tasks = [];
   @observable completedTasks = [];
-  @observable title = "";
-  @observable date = new Date();
+  @observable title: string;
+  @observable description: string;
+  @observable date: Date;
+  @observable selectedTask: Task;
 
   constructor() {
     // this.localStorageSync();
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.title = "";
+    this.description = "";
+    this.date = new Date();
   }
 
   @action addTask({ title, completed = false, date }) {
     if (this.title.length > 0) {
-      this.tasks.push(new Task({ title: this.title, completed, date: this.date }));
-      this.title = "";
+      this.tasks.push(new Task({ title: this.title, description: this.description, completed, date: this.date }));
+      this.resetForm();
     }
   }
 
@@ -58,39 +70,15 @@ export class TodosStore {
     task.completed = !task.completed;
   }
 
-  // @action showAll() {
-  //   this.filter = "SHOW_ALL";
-  // }
-  // @action showCompleted() {
-  //   this.filter = "COMPLETED";
-  // }
-  // @action showActive() {
-  //   this.filter = "ACTIVE";
-  // }
-
-  // @action clearCompleted() {
-  //   this.tasks = this._filter(this.tasks, "ACTIVE");
-  // }
-
-  @action setCompleteAll(value) {
-    this.tasks.forEach((task) => task.setCompleted(value));
+  @action drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 
-  // @computed get filteredTodos() {
-  //   return this.filter !== "SHOW_ALL" ? this._filter(this.tasks, this.filter) : this.tasks;
-  // }
+  @action editTask(task: Task) {}
 
-  // @computed get uncompletedItems() {
-  //   return this._filter(this.tasks, false).length;
-  // }
-
-  // @computed get allComplete() {
-  //   return this.uncompletedItems === 0;
-  // }
-
-  // private _filter(todos, value) {
-  //   return todos.filter(todo => (value === "COMPLETED" ? todo.completed : !todo.completed));
-  // }
+  @action setCompleteAll(value) {
+    this.tasks.forEach(task => task.setCompleted(value));
+  }
 
   // private localStorageSync() {
   //   const initialTasks = JSON.parse(localStorage.todos || "[]");

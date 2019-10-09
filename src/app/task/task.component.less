@@ -1,18 +1,16 @@
 .task {
-  padding: 16px;
+  padding: 0 16px;
   margin: 8px 0;
   border-radius: 4px;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
   background: #fff;
   border: 1px solid #fff;
   cursor: pointer;
-  transition: all .4s;
+  transition: all 0.4s;
   display: flex;
   align-items: center;
-
-  &:hover {
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-  }
+  height: 48px;
+  overflow: hidden;
 
   .checkbox {
     flex: 0 0 auto;
@@ -21,11 +19,16 @@
   .title {
     flex: 1 1 0;
     padding: 0 8px;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
-
 
   .date {
     flex: 0 0 auto;
+  }
+
+  .controls {
+    display: none;
   }
 
   &.crossedOut {
@@ -44,5 +47,15 @@
   &.error {
     background-color: #fff1f0;
     border: 1px solid #ffa39e;
+  }
+
+  &:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+    .date {
+      display: none;
+    }
+    .controls {
+      display: block;
+    }
   }
 }

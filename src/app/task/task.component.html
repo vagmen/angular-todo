@@ -1,12 +1,21 @@
-<div cdkDrag class="task" [ngClass]="{
+<div
+  class="task"
+  [ngClass]="{
     crossedOut: task.completed === true,
     warning: task.completed === false && isWarning(),
     error: task.completed === false && isError()
-  }" *mobxAutorun>
+  }"
+  *mobxAutorun
+>
   <mat-checkbox class="checkbox" (change)="todosStore.complete(task)" [checked]="task.completed"></mat-checkbox>
   <span class="title">{{ task.title }}</span>
-  <button mat-icon-button aria-label="Удалить" (click)="todosStore.removeTask(task)">
-    <mat-icon>delete</mat-icon>
-  </button>
-  <span class="date">{{task.date | date:'d LLLL' : null : 'ru'}}</span>
+  <div class="controls">
+    <button mat-icon-button aria-label="Редактировать" (click)="todosStore.editTask(task)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Удалить" (click)="todosStore.removeTask(task)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+  <span class="date">{{ task.date | date: "d LLLL":null:"ru" }}</span>
 </div>

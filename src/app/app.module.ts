@@ -13,6 +13,7 @@ import { MobxAngularModule } from "mobx-angular";
 import { MatInputModule } from "@angular/material/input";
 import { MatCardModule } from "@angular/material/card";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./header/header.component";
@@ -41,6 +42,7 @@ registerLocaleData(localeRu, "ru");
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    DragDropModule,
   ],
   providers: [TodosStore, MatDatepickerModule],
   bootstrap: [AppComponent],
