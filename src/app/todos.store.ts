@@ -4,10 +4,12 @@ import { Injectable } from "@angular/core";
 export class Task {
   @observable completed = false;
   @observable title: string;
+  @observable date: Date;
 
-  constructor({ title, completed }) {
+  constructor({ title, completed, date }) {
     this.completed = completed;
     this.title = title;
+    this.date = date;
   }
 
   @action setCompleted(value) {
@@ -20,26 +22,30 @@ export class TodosStore {
   @observable tasks = [];
   @observable completedTasks = [];
   @observable title = "";
+  @observable date = new Date();
 
   constructor() {
     // this.localStorageSync();
   }
 
-  @action addTask({ title, completed = false }) {
-    console.log("title", this.title);
-
+  @action addTask({ title, completed = false, date }) {
     if (this.title.length > 0) {
-      this.tasks.push(new Task({ title: this.title, completed }));
+      this.tasks.push(new Task({ title: this.title, completed, date: this.date }));
       this.title = "";
     }
   }
 
-  @action removeTask(task) {
-    const index = this.tasks.indexOf(task);
-    this.tasks.splice(index, 1);
+  @action removeTask(task: Task) {
+    if (task.completed) {
+      const index = this.completedTasks.indexOf(task);
+      this.completedTasks.splice(index, 1);
+    } else {
+      const index = this.tasks.indexOf(task);
+      this.tasks.splice(index, 1);
+    }
   }
 
-  @action complete(task) {
+  @action complete(task: Task) {
     if (task.completed) {
       const index = this.completedTasks.indexOf(task);
       this.completedTasks.splice(index, 1);
@@ -67,7 +73,7 @@ export class TodosStore {
   // }
 
   @action setCompleteAll(value) {
-    this.tasks.forEach(task => task.setCompleted(value));
+    this.tasks.forEach((task) => task.setCompleted(value));
   }
 
   // @computed get filteredTodos() {

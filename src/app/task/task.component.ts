@@ -10,18 +10,29 @@ export class TaskComponent implements OnInit {
   constructor(public todosStore: TodosStore) {}
   @Input() task: Task;
 
-  // selectedTask: Task;
+  today: Date;
+  taskDate: Date;
+
+  calcDays() {
+    const millisecondsPerDay = 1000 * 60 * 60 * 24;
+    const millisBetween = this.taskDate.getTime() - this.today.getTime() + 1000 * 60 * 60;
+    return millisBetween / millisecondsPerDay;
+  }
 
   isWarning() {
-    return true;
+    const days = this.calcDays();
+    return days < 3;
   }
 
   isError() {
-    return true;
+    const days = this.calcDays();
+    return days < 0;
   }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.today = new Date();
+    this.taskDate = this.task.date;
+  }
   // onSelect(task: Task) {
   //   this.selectedTask = task;
   // }
